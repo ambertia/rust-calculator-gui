@@ -14,7 +14,19 @@ fn main() -> glib::ExitCode {
 }
 
 fn build_ui(app: &Application) {
+    // Vertical box to represent the root pane
+    let box_root = gtk::Box::new(gtk::Orientation::Vertical, 5);
+
     // TODO Calculator input & results rectangle
 
     // TODO Calculator buttons
+
+    // Create a window and set the title
+    let window = ApplicationWindow::builder()
+        .application(app)
+        .title("Rust Calculator")
+        .child(&box_root)
+        .build();
+
+    window.present();
 }
