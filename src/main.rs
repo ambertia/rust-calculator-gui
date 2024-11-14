@@ -17,7 +17,7 @@ fn build_ui(app: &Application) {
     // Vertical box to represent the root pane
     let box_root = gtk::Box::new(gtk::Orientation::Vertical, 5);
 
-    // TODO Calculator input & results rectangle
+    // Top box to display the result, current operation, and user-typed argument
     let top_label_result = gtk::Label::builder().hexpand(true).label("result").build();
     let top_label_operation = gtk::Label::builder().width_request(100).label("*").build();
     let top_entry = gtk::Entry::builder().hexpand(true).build();
@@ -31,7 +31,7 @@ fn build_ui(app: &Application) {
         .build();
     box_root.append(&box_top);
 
-    // TODO Calculator buttons
+    // Grid for the calculator buttons
     let button_grid = gtk::Grid::new();
     button_grid.set_row_spacing(5);
     button_grid.set_column_spacing(5);
@@ -39,8 +39,9 @@ fn build_ui(app: &Application) {
     button_grid.set_margin_bottom(5);
     button_grid.set_margin_start(5);
     button_grid.set_margin_end(5);
-
     box_root.append(&button_grid);
+
+    // Add all of the intended buttons to the grid, using the builder factory for consistent properties
     button_grid.attach(&grid_button_builder_factory().label("1").build(), 0, 0, 1, 1);
     button_grid.attach(&grid_button_builder_factory().label("2").build(), 1, 0, 1, 1);
     button_grid.attach(&grid_button_builder_factory().label("3").build(), 0, 1, 1, 1);
@@ -56,6 +57,7 @@ fn build_ui(app: &Application) {
     window.present();
 }
 
+// Return a ButtonBuilder for a calculator button with the common properties already set
 fn grid_button_builder_factory() -> gtk::builders::ButtonBuilder {
     gtk::Button::builder()
         .hexpand(true)
