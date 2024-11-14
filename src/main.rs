@@ -32,6 +32,19 @@ fn build_ui(app: &Application) {
     box_root.append(&box_top);
 
     // TODO Calculator buttons
+    let button_grid = gtk::Grid::new();
+    button_grid.set_row_spacing(5);
+    button_grid.set_column_spacing(5);
+    button_grid.set_margin_top(5);
+    button_grid.set_margin_bottom(5);
+    button_grid.set_margin_start(5);
+    button_grid.set_margin_end(5);
+
+    box_root.append(&button_grid);
+    button_grid.attach(&grid_button_builder_factory().label("1").build(), 0, 0, 1, 1);
+    button_grid.attach(&grid_button_builder_factory().label("2").build(), 1, 0, 1, 1);
+    button_grid.attach(&grid_button_builder_factory().label("3").build(), 0, 1, 1, 1);
+    button_grid.attach(&grid_button_builder_factory().label("4").build(), 1, 1, 1, 1);
 
     // Create a window and set the title
     let window = ApplicationWindow::builder()
@@ -41,4 +54,10 @@ fn build_ui(app: &Application) {
         .build();
 
     window.present();
+}
+
+fn grid_button_builder_factory() -> gtk::builders::ButtonBuilder {
+    gtk::Button::builder()
+        .hexpand(true)
+        .vexpand(true)
 }
