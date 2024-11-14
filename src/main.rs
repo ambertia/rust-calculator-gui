@@ -1,4 +1,4 @@
-use gtk::{glib, prelude::*, Application};
+use gtk::{glib, prelude::*, Application, ApplicationWindow};
 
 const APP_ID: &str = "com.github.ambertia.rust-calculator-gui";
 
