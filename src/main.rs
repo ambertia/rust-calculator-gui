@@ -18,13 +18,13 @@ fn build_ui(app: &Application) {
     let box_root = gtk::Box::new(gtk::Orientation::Vertical, 5);
 
     // TODO Calculator input & results rectangle
-    let top_label_result = gtk::Label::builder().hexpand(true).build();
-    let top_label_operation = gtk::Label::builder().width_request(100).build();
+    let top_label_result = gtk::Label::builder().hexpand(true).label("result").build();
+    let top_label_operation = gtk::Label::builder().width_request(100).label("*").build();
     let top_entry = gtk::Entry::builder().hexpand(true).build();
 
     // Horizontal box to represent the results pane
     let box_top = gtk::CenterBox::builder()
-        .vexpand(true)
+        .height_request(120)
         .start_widget(&top_label_result)
         .center_widget(&top_label_operation)
         .end_widget(&top_entry)
