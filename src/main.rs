@@ -42,10 +42,35 @@ fn build_ui(app: &Application) {
     box_root.append(&button_grid);
 
     // Add all of the intended buttons to the grid, using the builder factory for consistent properties
-    button_grid.attach(&grid_button_builder_factory().label("1").build(), 0, 0, 1, 1);
-    button_grid.attach(&grid_button_builder_factory().label("2").build(), 1, 0, 1, 1);
-    button_grid.attach(&grid_button_builder_factory().label("3").build(), 0, 1, 1, 1);
-    button_grid.attach(&grid_button_builder_factory().label("4").build(), 1, 1, 1, 1);
+    // Button row 0 (top)
+    button_grid.attach(&grid_button_builder_factory().label("C").build(), 0, 0, 1, 1);
+    button_grid.attach(&grid_button_builder_factory().label("√").build(), 1, 0, 1, 1);
+    button_grid.attach(&grid_button_builder_factory().label("^").build(), 2, 0, 1, 1);
+    button_grid.attach(&grid_button_builder_factory().label("÷").build(), 3, 0, 1, 1);
+
+    // Row 1
+    button_grid.attach(&grid_button_builder_factory().label("7").build(), 0, 1, 1, 1);
+    button_grid.attach(&grid_button_builder_factory().label("8").build(), 1, 1, 1, 1);
+    button_grid.attach(&grid_button_builder_factory().label("9").build(), 2, 1, 1, 1);
+    button_grid.attach(&grid_button_builder_factory().label("*").build(), 3, 1, 1, 1);
+
+    // Row 2
+    button_grid.attach(&grid_button_builder_factory().label("4").build(), 0, 2, 1, 1);
+    button_grid.attach(&grid_button_builder_factory().label("5").build(), 1, 2, 1, 1);
+    button_grid.attach(&grid_button_builder_factory().label("6").build(), 2, 2, 1, 1);
+    button_grid.attach(&grid_button_builder_factory().label("-").build(), 3, 2, 1, 1);
+
+    // Row 3
+    button_grid.attach(&grid_button_builder_factory().label("1").build(), 0, 3, 1, 1);
+    button_grid.attach(&grid_button_builder_factory().label("2").build(), 1, 3, 1, 1);
+    button_grid.attach(&grid_button_builder_factory().label("3").build(), 2, 3, 1, 1);
+    button_grid.attach(&grid_button_builder_factory().label("+").build(), 3, 3, 1, 1);
+
+    // Row 4 (bottom)
+    button_grid.attach(&grid_button_builder_factory().label("(-)").build(), 0, 4, 1, 1);
+    button_grid.attach(&grid_button_builder_factory().label("0").build(), 1, 4, 1, 1);
+    button_grid.attach(&grid_button_builder_factory().label(".").build(), 2, 4, 1, 1);
+    button_grid.attach(&grid_button_builder_factory().label("=").build(), 3, 4, 1, 1);
 
     // Create a window and set the title
     let window = ApplicationWindow::builder()
