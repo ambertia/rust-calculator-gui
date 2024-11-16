@@ -1,7 +1,7 @@
 fn main() {
     glib_build_tools::compile_resources(
-        &["resources"],
-        "resources/resources.gresource.xml",
+        &["src/resources"],
+        "src/resources/resources.gresources.xml",
         "calculator.gresource"
     );
 }
