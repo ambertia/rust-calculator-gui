@@ -1,5 +1,5 @@
 use glib::subclass::InitializingObject;
-use gtk::{glib, Box, prelude::*, subclass::prelude::*, CompositeTemplate};
+use gtk::{glib, Box, subclass::prelude::*, CompositeTemplate};
 
 // Object holding the state
 #[derive(CompositeTemplate, Default)]
