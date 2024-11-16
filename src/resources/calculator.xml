@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
-  <template class="RustCalculatorGTKWindow" parent="GTKApplicationWindow">
+  <template class="RustCalculatorGTKWindow" parent="GtkApplicationWindow">
     <property name="title">Rust Calculator GUI</property>
     <child>
       <!-- Root GObject of the application window -->
@@ -35,7 +35,10 @@
           <object class="GtkGrid" id="button_grid">
             <property name="row-spacing">5</property>
             <property name="column-spacing">5</property>
-            <property name="margin">5</property>
+            <property name="margin-top">5</property>
+            <property name="margin-bottom">5</property>
+            <property name="margin-start">5</property>
+            <property name="margin-end">5</property>
 
             <!-- Calculator buttons -->
 
@@ -243,7 +246,8 @@
                 </layout>
               </object>
             </child>
-
+          </object>
+        </child>
       </object>
     </child>
   </template>
