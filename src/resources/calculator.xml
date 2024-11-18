@@ -5,24 +5,25 @@
     <child>
       <!-- Root GObject of the application window -->
       <object class="GtkBox" id="box_root">
+        <property name="orientation">vertical</property>
 
         <!-- CenterBox to hold the results and data entry panes -->
         <child>
           <object class="GtkCenterBox" id="box_top">
             <property name="height-request">120</property>
-            <child>
+            <child type="start">
               <object class="GtkLabel" id="top_label_result">
                 <property name="hexpand">true</property>
                 <property name="label">testaroo</property>
               </object>
             </child>
-            <child>
+            <child type="center">
               <object class="GtkLabel" id="top_label_operation">
                 <property name="width-request">100</property>
                 <property name="label">*</property>
               </object>
             </child>
-            <child>
+            <child type="end">
               <object class="GtkEntry" id="top_entry">
                 <property name="hexpand">true</property>
               </object>
