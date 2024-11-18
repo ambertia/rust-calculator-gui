@@ -3,7 +3,7 @@ use gtk::{glib, Box, subclass::prelude::*, CompositeTemplate};
 
 // Object holding the state
 #[derive(CompositeTemplate, Default)]
-#[template(resource = "/com/github/ambertia/rust-calculator-gui/calculator.xml")]
+#[template(resource = "/com/github/ambertia/rust-calculator-gui/calculator.ui")]
 pub struct Window {
     #[template_child]
     pub box_root: TemplateChild<Box>,
