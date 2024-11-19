@@ -58,7 +58,7 @@
             <child>
               <object class="GtkButton">
                 <signal name="clicked" handler="dispatch_grid_click"/>
-                <property name="label">√`</property>
+                <property name="label">√</property>
                 <layout>
                   <property name="column">1</property>
                   <property name="row">0</property>
