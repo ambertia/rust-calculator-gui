@@ -25,10 +25,3 @@ fn build_ui(app: &Application) {
     let window = Window::new(app);
     window.present();
 }
-
-// Return a ButtonBuilder for a calculator button with the common properties already set
-fn grid_button_builder_factory() -> gtk::builders::ButtonBuilder {
-    gtk::Button::builder()
-        .hexpand(true)
-        .vexpand(true)
-}
