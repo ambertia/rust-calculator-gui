@@ -14,7 +14,7 @@
             <child type="start">
               <object class="GtkLabel" id="top_label_result">
                 <property name="hexpand">true</property>
-                <property name="label">testaroo</property>
+                <property name="label">operand 1</property>
               </object>
             </child>
             <child type="center">
@@ -24,8 +24,9 @@
               </object>
             </child>
             <child type="end">
-              <object class="GtkEntry" id="top_entry">
+              <object class="GtkLabel" id="top_entry">
                 <property name="hexpand">true</property>
+                <property name="label">operand 2</property>
               </object>
             </child>
           </object>
