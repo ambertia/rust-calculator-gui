@@ -1,5 +1,5 @@
 use glib::subclass::InitializingObject;
-use gtk::{glib, Box, subclass::prelude::*, CompositeTemplate};
+use gtk::{glib::{self, Propagation}, prelude::{GtkWindowExt, WidgetExt}, subclass::prelude::*, Box, CompositeTemplate, ShortcutController};
 
 // Object holding the state
 #[derive(CompositeTemplate, Default)]
@@ -7,6 +7,11 @@ use gtk::{glib, Box, subclass::prelude::*, CompositeTemplate};
 pub struct Window {
     #[template_child]
     pub box_root: TemplateChild<Box>,
+
+    // State properties for the calculator
+    pub buffer_operand: f64,
+    pub right_operand: f64,
+    pub operation: String,
 }
 
 // Central trait for subclassing an object
@@ -28,6 +33,9 @@ impl ObjectSubclass for Window {
 
 #[gtk::template_callbacks]
 impl Window {
+
+    // Primary callback used by the calculator grid buttons
+    // Try to print the label's text to stdout, or None if there is no text
     #[template_callback]
     fn dispatch_grid_click(button: &gtk::Button) {
         let button_label = gtk::prelude::ButtonExt::label(button);
@@ -41,6 +49,15 @@ impl Window {
 // Trait shared by all GObjects
 impl ObjectImpl for Window {
     fn constructed(&self) {
+        // Add keybindings to the window
+        let event_controller = gtk::EventControllerKey::new();
+        event_controller.connect_key_pressed(|_, key, _, _| {
+            match key {
+                _ => { println!("key pressed"); Propagation::Stop },
+            }
+        });
+        gtk::prelude::WidgetExt::add_controller(self.default_widget(), event_controller);
+
         // Call "constructed" on parent
         self.parent_constructed();
     }
