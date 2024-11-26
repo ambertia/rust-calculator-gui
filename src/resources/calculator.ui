@@ -7,6 +7,47 @@
       <object class="GtkBox" id="box_root">
         <property name="orientation">vertical</property>
 
+        <!-- Box to hold the results and data entry -->
+        <child>
+          <object class="GtkBox" id="box_top1">
+            <property name="orientation">vertical</property>
+
+            <!-- Label to contain the operand in the buffer -->
+            <child>
+              <object class="GtkLabel" id="operand_buffer_label">
+                <property name="hexpand">true</property>
+                <property name="xalign">1</property>
+                <property name="label">buffer operand</property>
+              </object>
+            </child>
+
+            <!-- Box to hold operation label and input operand -->
+            <child>
+              <object class="GtkBox" id="box_inputs">
+                <property name="orientation">horizontal</property>
+
+                <!-- Operation label -->
+                <child>
+                  <object class="GtkLabel" id="operation_label">
+                    <property name="width-request">100</property>
+                    <property name="label">+</property>
+                  </object>
+                </child>
+
+                <!-- Input operand label -->
+                <child>
+                  <object class="GtkLabel" id="operand_input_label">
+                    <property name="hexpand">true</property>
+                    <property name="label">input operand</property>
+                  </object>
+                </child>
+
+              </object>
+            </child>
+          </object>
+        </child>
+
+
         <!-- CenterBox to hold the results and data entry panes -->
         <child>
           <object class="GtkCenterBox" id="box_top">
