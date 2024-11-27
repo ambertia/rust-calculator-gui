@@ -3,14 +3,16 @@ use gtk::{glib::{self, Propagation}, prelude::{GtkWindowExt, WidgetExt}, subclas
 
 // Object holding the state
 #[derive(CompositeTemplate, Default)]
-#[template(resource = "/com/github/ambertia/rust-calculator-gui/calculator.ui")]
+#[template(resource = "/com/github/ambertia/rust-calculator-gui/calculator.ui", allow_template_child_without_attribute)]
 pub struct Window {
-    #[template_child]
     pub box_root: TemplateChild<Box>,
+    pub operand_buffer_label: TemplateChild<Label>,
+    pub operand_input_label: TemplateChild<Label>,
+    pub operation_label: TemplateChild<Label>,
 
     // State properties for the calculator
     pub buffer_operand: f64,
-    pub right_operand: f64,
+    pub input_operand: f64,
     pub operation: String,
 }
 
