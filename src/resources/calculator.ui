@@ -59,10 +59,10 @@
           <object class="GtkGrid" id="button_grid">
             <property name="row-spacing">5</property>
             <property name="column-spacing">5</property>
-            <property name="margin-top">5</property>
-            <property name="margin-bottom">5</property>
-            <property name="margin-start">5</property>
-            <property name="margin-end">5</property>
+            <property name="margin-top">10</property>
+            <property name="margin-bottom">10</property>
+            <property name="margin-start">10</property>
+            <property name="margin-end">10</property>
 
             <!-- Calculator buttons -->
 
