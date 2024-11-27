@@ -18,7 +18,7 @@ impl Window {
 
     fn setup_actions(&self) {
 
-        // Action when a digit is dispatch
+        // Action when a digit is dispatched
         let dispatch_digit = ActionEntry::builder("digit")
             .parameter_type(Some(&i32::static_variant_type()))
             .activate(move |window: &Self, _action, parameter| {
