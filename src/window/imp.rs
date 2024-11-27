@@ -51,14 +51,6 @@ impl Window {
 // Trait shared by all GObjects
 impl ObjectImpl for Window {
     fn constructed(&self) {
-        // Add keybindings to the window
-        let event_controller = gtk::EventControllerKey::new();
-        event_controller.connect_key_pressed(|_, key, _, _| {
-            match key {
-                _ => { println!("key pressed"); Propagation::Stop },
-            }
-        });
-        gtk::prelude::WidgetExt::add_controller(self.default_widget(), event_controller);
 
         // Call "constructed" on parent
         self.parent_constructed();
