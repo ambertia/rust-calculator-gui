@@ -9,12 +9,16 @@
 
         <!-- Box to hold the results and data entry -->
         <child>
-          <object class="GtkBox" id="box_top1">
+          <object class="GtkBox" id="box_top">
             <property name="orientation">vertical</property>
+            <property name="margin-top">10</property>
+            <property name="margin-start">10</property>
+            <property name="margin-end">10</property>
 
             <!-- Label to contain the operand in the buffer -->
             <child>
               <object class="GtkLabel" id="operand_buffer_label">
+                <property name="height-request">100</property>
                 <property name="hexpand">true</property>
                 <property name="xalign">1</property>
                 <property name="label">buffer operand</property>
@@ -24,6 +28,7 @@
             <!-- Box to hold operation label and input operand -->
             <child>
               <object class="GtkBox" id="box_inputs">
+                <property name="height-request">100</property>
                 <property name="orientation">horizontal</property>
 
                 <!-- Operation label -->
@@ -31,6 +36,7 @@
                   <object class="GtkLabel" id="operation_label">
                     <property name="width-request">100</property>
                     <property name="label">+</property>
+                    <property name="xalign">0.5</property>
                   </object>
                 </child>
 
@@ -38,36 +44,11 @@
                 <child>
                   <object class="GtkLabel" id="operand_input_label">
                     <property name="hexpand">true</property>
+                    <property name="xalign">1</property>
                     <property name="label">input operand</property>
                   </object>
                 </child>
 
-              </object>
-            </child>
-          </object>
-        </child>
-
-
-        <!-- CenterBox to hold the results and data entry panes -->
-        <child>
-          <object class="GtkCenterBox" id="box_top">
-            <property name="height-request">120</property>
-            <child type="start">
-              <object class="GtkLabel" id="top_label_result">
-                <property name="hexpand">true</property>
-                <property name="label">operand 1</property>
-              </object>
-            </child>
-            <child type="center">
-              <object class="GtkLabel" id="top_label_operation">
-                <property name="width-request">100</property>
-                <property name="label">*</property>
-              </object>
-            </child>
-            <child type="end">
-              <object class="GtkLabel" id="top_entry">
-                <property name="hexpand">true</property>
-                <property name="label">operand 2</property>
               </object>
             </child>
           </object>
