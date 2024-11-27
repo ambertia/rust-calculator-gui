@@ -1,13 +1,17 @@
 use glib::subclass::InitializingObject;
-use gtk::{glib::{self, Propagation}, prelude::{GtkWindowExt, WidgetExt}, subclass::prelude::*, Box, CompositeTemplate, ShortcutController};
+use gtk::{glib::{self}, subclass::prelude::*, Box, CompositeTemplate, Label};
 
 // Object holding the state
 #[derive(CompositeTemplate, Default)]
-#[template(resource = "/com/github/ambertia/rust-calculator-gui/calculator.ui", allow_template_child_without_attribute)]
+#[template(resource = "/com/github/ambertia/rust-calculator-gui/calculator.ui")]
 pub struct Window {
+    #[template_child]
     pub box_root: TemplateChild<Box>,
+    #[template_child]
     pub operand_buffer_label: TemplateChild<Label>,
+    #[template_child]
     pub operand_input_label: TemplateChild<Label>,
+    #[template_child]
     pub operation_label: TemplateChild<Label>,
 
     // State properties for the calculator
@@ -54,6 +58,9 @@ impl ObjectImpl for Window {
 
         // Call "constructed" on parent
         self.parent_constructed();
+
+        // Add actions
+        self.obj().setup_actions();
     }
 }
 
