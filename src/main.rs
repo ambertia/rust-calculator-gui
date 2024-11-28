@@ -1,6 +1,6 @@
 mod window;
 
-use gtk::{gio::{self, ActionEntry}, glib, prelude::*, Application, ApplicationWindow};
+use gtk::{gio::{self, ActionEntry}, glib, prelude::*, Application};
 use window::Window;
 
 const APP_ID: &str = "com.github.ambertia.rust-calculator-gui";
