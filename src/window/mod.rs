@@ -45,6 +45,19 @@ impl Window {
             })
             .build();
 
-        self.add_action_entries([dispatch_digit, dispatch_operation]);
+        // Action for special dispatches (clear, negative, decimal point, equals)
+        let dispatch_special = ActionEntry::builder("special")
+            .parameter_type(Some(&String::static_variant_type()))
+            .activate(move |window: &Self, _action, parameter| {
+                let parameter = parameter
+                    .expect("Could not get parameter")
+                    .get::<String>()
+                    .expect("Special parameter should be String");
+                // Core callback functionality
+                window.imp().operand_buffer_label.set_label(parameter.as_str());
+            })
+            .build();
+
+        self.add_action_entries([dispatch_digit, dispatch_operation, dispatch_special]);
     }
 }
