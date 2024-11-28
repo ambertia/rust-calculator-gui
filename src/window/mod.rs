@@ -22,12 +22,12 @@ impl Window {
         let dispatch_digit = ActionEntry::builder("digit")
             .parameter_type(Some(&i32::static_variant_type()))
             .activate(move |window: &Self, _action, parameter| {
-                print!("Digit dispatch: ");
                 // Fetch the parameter as i32
                 let parameter = parameter
                     .expect("Could not get parameter")
                     .get::<i32>()
                     .expect("Digit parameter should be i32");
+                // Core callback functionality
                 window.imp().operand_input_label.set_label(&format!("{parameter}"));
             })
             .build();
