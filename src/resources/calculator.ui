@@ -85,8 +85,9 @@
 
             <child>
               <object class="GtkButton">
-                <signal name="clicked" handler="dispatch_grid_click"/>
                 <property name="label">√</property>
+                <property name="action-name">win.operation</property>
+                <property name="action-target">"√"</property>
                 <layout>
                   <property name="column">1</property>
                   <property name="row">0</property>
@@ -96,8 +97,9 @@
 
             <child>
               <object class="GtkButton">
-                <signal name="clicked" handler="dispatch_grid_click"/>
                 <property name="label">^</property>
+                <property name="action-name">win.operation</property>
+                <property name="action-target">"^"</property>
                 <layout>
                   <property name="column">2</property>
                   <property name="row">0</property>
@@ -107,8 +109,9 @@
 
             <child>
               <object class="GtkButton">
-                <signal name="clicked" handler="dispatch_grid_click"/>
                 <property name="label">÷</property>
+                <property name="action-name">win.operation</property>
+                <property name="action-target">"÷"</property>
                 <layout>
                   <property name="column">3</property>
                   <property name="row">0</property>
@@ -160,8 +163,9 @@
 
             <child>
               <object class="GtkButton">
-                <signal name="clicked" handler="dispatch_grid_click"/>
                 <property name="label">*</property>
+                <property name="action-name">win.operation</property>
+                <property name="action-target">"*"</property>
                 <layout>
                   <property name="column">3</property>
                   <property name="row">1</property>
@@ -213,8 +217,9 @@
 
             <child>
               <object class="GtkButton">
-                <signal name="clicked" handler="dispatch_grid_click"/>
                 <property name="label">-</property>
+                <property name="action-name">win.operation</property>
+                <property name="action-target">"-"</property>
                 <layout>
                   <property name="column">3</property>
                   <property name="row">2</property>
@@ -261,8 +266,9 @@
 
             <child>
               <object class="GtkButton">
-                <signal name="clicked" handler="dispatch_grid_click"/>
                 <property name="label">+</property>
+                <property name="action-name">win.operation</property>
+                <property name="action-target">"+"</property>
                 <layout>
                   <property name="column">3</property>
                   <property name="row">3</property>
