@@ -29,26 +29,10 @@ impl ObjectSubclass for Window {
 
     fn class_init(klass: &mut Self::Class) {
         klass.bind_template();
-        klass.bind_template_callbacks();
     }
 
     fn instance_init(obj: &InitializingObject<Self>) {
         obj.init_template();
-    }
-}
-
-#[gtk::template_callbacks]
-impl Window {
-
-    // Primary callback used by the calculator grid buttons
-    // Try to print the label's text to stdout, or None if there is no text
-    #[template_callback]
-    fn dispatch_grid_click(button: &gtk::Button) {
-        let button_label = gtk::prelude::ButtonExt::label(button);
-        match button_label {
-            Some(s) => println!("{s}"),
-            None => println!("None")
-        }
     }
 }
 
