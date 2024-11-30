@@ -15,7 +15,7 @@ fn main() -> glib::ExitCode {
 
     app.connect_startup(|app| {
         set_accelerators(app);
-        load_css()
+        load_css();
     });
 
     // Build the UI when the app activates
