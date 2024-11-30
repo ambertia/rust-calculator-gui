@@ -1,6 +1,6 @@
 mod window;
 
-use gtk::{gio::{self, ActionEntry}, glib, prelude::*, Application};
+use gtk::{gdk::Display, gio::{self, ActionEntry}, glib, prelude::*, Application, CssProvider};
 use window::Window;
 
 const APP_ID: &str = "com.github.ambertia.rust-calculator-gui";
@@ -12,6 +12,8 @@ fn main() -> glib::ExitCode {
 
     // Create the GTK application
     let app = Application::builder().application_id(APP_ID).build();
+
+    app.connect_startup(|_| load_css());
 
     // Build the UI when the app activates
     app.connect_activate(build_ui);
@@ -60,4 +62,17 @@ fn build_ui(app: &Application) {
     app.set_accels_for_action("win.close", &["<Ctrl>w"]);
 
     window.present();
+}
+
+fn load_css() {
+    // Load the CSS file
+    let provider = CssProvider::new();
+    provider.load_from_resource("/com/github/ambertia/rust-calculator-gui/style.css");
+
+    // Add provider to the default display
+    gtk::style_context_add_provider_for_display(
+        &Display::default().expect("Could not connect to a display"),
+        &provider,
+        gtk::STYLE_PROVIDER_PRIORITY_APPLICATION
+    );
 }

@@ -2,5 +2,6 @@
 <gresources>
   <gresource prefix="/com/github/ambertia/rust-calculator-gui">
     <file compressed="true" preprocess="xml-stripblanks">calculator.ui</file>
+    <file compressed="true">style.css</file>
   </gresource>
 </gresources>
