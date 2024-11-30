@@ -21,7 +21,7 @@
                 <property name="height-request">100</property>
                 <property name="hexpand">true</property>
                 <property name="xalign">1</property>
-                <property name="label">buffer operand</property>
+                <property name="label"></property>
               </object>
             </child>
 
@@ -35,7 +35,7 @@
                 <child>
                   <object class="GtkLabel" id="operation_label">
                     <property name="width-request">100</property>
-                    <property name="label">+</property>
+                    <property name="label"></property>
                     <property name="xalign">0.5</property>
                   </object>
                 </child>
@@ -45,7 +45,7 @@
                   <object class="GtkLabel" id="operand_input_label">
                     <property name="hexpand">true</property>
                     <property name="xalign">1</property>
-                    <property name="label">input operand</property>
+                    <property name="label"></property>
                   </object>
                 </child>
 
