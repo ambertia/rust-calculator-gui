@@ -30,18 +30,15 @@ impl Window {
 
     // Process a special action dispatch
     pub fn process_special(&self, parameter: &str) {
-        if parameter == "C" {
-            self.clear();
-            return;
-        }
+        let input: &str = &self.operand_input_label.label();
         match parameter {
             "C" => self.clear(),
-            "-" => match self.operand_input_label.label().strip_prefix("-") {
+            "-" => match input.strip_prefix("-") {
                 Some(s) => self.operand_input_label.set_label(s),
-                None => self.operand_input_label.set_label(&("-".to_owned() + parameter))
+                None => self.operand_input_label.set_label(&("-".to_owned() + input))
             },
-            "." => if !parameter.contains(".") {
-                self.operand_input_label.set_label(&(parameter.to_owned() + "."))
+            "." => if !input.contains(".") {
+                self.operand_input_label.set_label(&(input.to_owned() + "."))
             },
             "=" => self.calculate(),
             _ => {}
