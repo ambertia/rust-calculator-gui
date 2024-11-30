@@ -13,36 +13,13 @@ fn main() -> glib::ExitCode {
     // Create the GTK application
     let app = Application::builder().application_id(APP_ID).build();
 
-    app.connect_startup(|_| load_css());
+    app.connect_startup(|app| {
+        set_accelerators(app);
+        load_css()
+    });
 
     // Build the UI when the app activates
     app.connect_activate(build_ui);
-
-    // Key accelerators for digit dispatches
-    app.set_accels_for_action("win.digit(0)", &["0"]);
-    app.set_accels_for_action("win.digit(1)", &["1"]);
-    app.set_accels_for_action("win.digit(2)", &["2"]);
-    app.set_accels_for_action("win.digit(3)", &["3"]);
-    app.set_accels_for_action("win.digit(4)", &["4"]);
-    app.set_accels_for_action("win.digit(5)", &["5"]);
-    app.set_accels_for_action("win.digit(6)", &["6"]);
-    app.set_accels_for_action("win.digit(7)", &["7"]);
-    app.set_accels_for_action("win.digit(8)", &["8"]);
-    app.set_accels_for_action("win.digit(9)", &["9"]);
-
-    // Key accelerators for operation dispatches
-    app.set_accels_for_action("win.operation('+')", &["plus"]);
-    app.set_accels_for_action("win.operation('-')", &["minus"]);
-    app.set_accels_for_action("win.operation('*')", &["asterisk"]);
-    app.set_accels_for_action("win.operation('÷')", &["slash"]);
-    app.set_accels_for_action("win.operation('^')", &["asciicircum"]);
-    app.set_accels_for_action("win.operation('√')", &["r"]);
-
-    // Key accelerators for special dispatches
-    app.set_accels_for_action("win.special('C')", &["c", "<Shift>c", "Escape"]);
-    app.set_accels_for_action("win.special('-')", &["n", "<Shift>n", "underscore"]);
-    app.set_accels_for_action("win.special('.')", &["period"]);
-    app.set_accels_for_action("win.special('=')", &["equal", "Return"]);
 
     // Run the application and return the error code when it ends
     app.run()
@@ -75,4 +52,32 @@ fn load_css() {
         &provider,
         gtk::STYLE_PROVIDER_PRIORITY_APPLICATION
     );
+}
+
+fn set_accelerators(app: &Application) {
+    // Key accelerators for digit dispatches
+    app.set_accels_for_action("win.digit(0)", &["0"]);
+    app.set_accels_for_action("win.digit(1)", &["1"]);
+    app.set_accels_for_action("win.digit(2)", &["2"]);
+    app.set_accels_for_action("win.digit(3)", &["3"]);
+    app.set_accels_for_action("win.digit(4)", &["4"]);
+    app.set_accels_for_action("win.digit(5)", &["5"]);
+    app.set_accels_for_action("win.digit(6)", &["6"]);
+    app.set_accels_for_action("win.digit(7)", &["7"]);
+    app.set_accels_for_action("win.digit(8)", &["8"]);
+    app.set_accels_for_action("win.digit(9)", &["9"]);
+
+    // Key accelerators for operation dispatches
+    app.set_accels_for_action("win.operation('+')", &["plus"]);
+    app.set_accels_for_action("win.operation('-')", &["minus"]);
+    app.set_accels_for_action("win.operation('*')", &["asterisk"]);
+    app.set_accels_for_action("win.operation('÷')", &["slash"]);
+    app.set_accels_for_action("win.operation('^')", &["asciicircum"]);
+    app.set_accels_for_action("win.operation('√')", &["r"]);
+
+    // Key accelerators for special dispatches
+    app.set_accels_for_action("win.special('C')", &["c", "<Shift>c", "Escape"]);
+    app.set_accels_for_action("win.special('-')", &["n", "<Shift>n", "underscore"]);
+    app.set_accels_for_action("win.special('.')", &["period"]);
+    app.set_accels_for_action("win.special('=')", &["equal", "Return"]);
 }
