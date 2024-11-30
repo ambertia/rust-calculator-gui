@@ -28,7 +28,8 @@ impl Window {
                     .get::<i32>()
                     .expect("Digit parameter should be i32");
                 // Core callback functionality
-                window.imp().operand_input_label.set_label(&format!("{parameter}"));
+                window.imp().operand_input_label.set_label(
+                    &(window.imp().operand_input_label.label().to_string() + &parameter.to_string()));
             })
             .build();
 
