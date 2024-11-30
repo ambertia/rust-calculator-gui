@@ -1,5 +1,5 @@
 use glib::subclass::InitializingObject;
-use gtk::{glib::{self}, subclass::prelude::*, Box, CompositeTemplate, Label};
+use gtk::{glib::{self}, prelude::ToValue, subclass::prelude::*, Box, CompositeTemplate, Label};
 
 // Object holding the state
 #[derive(CompositeTemplate, Default)]
@@ -34,6 +34,22 @@ impl Window {
             self.clear();
             return;
         }
+        match parameter {
+            "C" => self.clear(),
+            "-" => match self.operand_input_label.label().strip_prefix("-") {
+                Some(s) => self.operand_input_label.set_label(s),
+                None => self.operand_input_label.set_label(&("-".to_owned() + parameter))
+            },
+            "." => if !parameter.contains(".") {
+                self.operand_input_label.set_label(&(parameter.to_owned() + "."))
+            },
+            "=" => self.calculate(),
+            _ => {}
+        }
+    }
+
+    fn calculate(&self) {
+
     }
 }
 
