@@ -20,6 +20,15 @@ pub struct Window {
     pub operation: String,
 }
 
+impl Window {
+    // Clear all labels
+    pub fn clear(&self) {
+        self.operand_buffer_label.set_label("");
+        self.operand_input_label.set_label("");
+        self.operation_label.set_label("");
+    }
+}
+
 // Central trait for subclassing an object
 #[glib::object_subclass]
 impl ObjectSubclass for Window {
