@@ -54,8 +54,7 @@ impl Window {
                     .get::<String>()
                     .expect("Special parameter should be String");
                 // Core callback functionality
-                window.imp().operand_buffer_label.set_label(parameter.as_str());
-                if parameter == "C" { window.imp().clear() };
+                window.imp().process_special(parameter.as_str());
             })
             .build();
 

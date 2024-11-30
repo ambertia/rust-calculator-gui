@@ -27,6 +27,14 @@ impl Window {
         self.operand_input_label.set_label("");
         self.operation_label.set_label("");
     }
+
+    // Process a special action dispatch
+    pub fn process_special(&self, parameter: &str) {
+        if parameter == "C" {
+            self.clear();
+            return;
+        }
+    }
 }
 
 // Central trait for subclassing an object
