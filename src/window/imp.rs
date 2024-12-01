@@ -40,7 +40,7 @@ impl Window {
                 self.operand_input_label.set_label(&(input.to_owned() + "."))
             },
             "=" => match self.calculate() {
-                Ok(f) => self.operand_buffer_label.set_label(format!("{f:.5}").as_str()),
+                Ok(f) => { self.clear(); self.operand_buffer_label.set_label(format!("{f:.5}").as_str()); },
                 Err(_) => { self.clear(); self.operand_buffer_label.set_label("ERR"); }
             },
             _ => {}
