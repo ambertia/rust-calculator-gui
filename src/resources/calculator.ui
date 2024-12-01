@@ -9,7 +9,7 @@
 
         <!-- Box to hold the results and data entry -->
         <child>
-          <object class="GtkBox" id="box_top">
+          <object class="GtkBox">
             <property name="orientation">vertical</property>
             <property name="margin-top">10</property>
             <property name="margin-start">10</property>

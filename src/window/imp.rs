@@ -1,12 +1,10 @@
 use glib::subclass::InitializingObject;
-use gtk::{glib::{self}, subclass::prelude::*, Box, CompositeTemplate, Label};
+use gtk::{glib::{self}, subclass::prelude::*, CompositeTemplate, Label};
 
 // Object holding the state
 #[derive(CompositeTemplate, Default)]
 #[template(resource = "/com/github/ambertia/rust-calculator-gui/calculator.ui")]
 pub struct Window {
-    #[template_child]
-    pub box_root: TemplateChild<Box>,
     #[template_child]
     pub operand_buffer_label: TemplateChild<Label>,
     #[template_child]
