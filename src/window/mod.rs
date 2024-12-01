@@ -43,6 +43,10 @@ impl Window {
                     .expect("Operation parameter should be String");
                 // Core callback functionality
                 window.imp().operation_label.set_label(parameter.as_str());
+                if "+-*÷^".contains(parameter.as_str()) && window.imp().operand_buffer_label.label().is_empty() {
+                    window.imp().operand_buffer_label.set_label(window.imp().operand_input_label.label().as_str());
+                    window.imp().operand_input_label.set_label("");
+                }
             })
             .build();
 
