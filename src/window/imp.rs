@@ -32,6 +32,10 @@ impl Window {
         let input: &str = &self.operand_input_label.label();
         match parameter {
             "C" => self.clear(),
+            "D" => {
+                let label_text = self.operand_input_label.label();
+                self.operand_input_label.set_label(label_text.split_at(label_text.len() - 1).0);
+            },
             "-" => match input.strip_prefix("-") {
                 Some(s) => self.operand_input_label.set_label(s),
                 None => self.operand_input_label.set_label(&("-".to_owned() + input))

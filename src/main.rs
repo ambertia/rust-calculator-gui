@@ -80,4 +80,5 @@ fn set_accelerators(app: &Application) {
     app.set_accels_for_action("win.special('-')", &["n", "<Shift>n", "underscore"]);
     app.set_accels_for_action("win.special('.')", &["period"]);
     app.set_accels_for_action("win.special('=')", &["equal", "Return"]);
+    app.set_accels_for_action("win.special('D')", &["BackSpace"])
 }
