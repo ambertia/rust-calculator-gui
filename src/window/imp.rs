@@ -12,11 +12,6 @@ pub struct Window {
     pub operand_input_label: TemplateChild<Label>,
     #[template_child]
     pub operation_label: TemplateChild<Label>,
-
-    // State properties for the calculator
-    pub buffer_operand: f64,
-    pub input_operand: f64,
-    pub operation: String,
 }
 
 impl Window {
