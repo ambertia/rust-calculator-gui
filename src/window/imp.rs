@@ -47,7 +47,7 @@ impl Window {
     }
 
     fn calculate(&self) -> Result<f64, Box<dyn Error>> {
-        // Get the operation label and make sure it's not blank
+        // Get the operation label
         let operation: &str = &self.operation_label.label();
 
         // Get the first operand from its label
