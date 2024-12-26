@@ -50,6 +50,7 @@ Two instance methods associated with the custom `Window` subclass handle the mea
   - Decimal operations are restricted to the hundred-thousandths place at smallest due to the hard-coded number of displayed decimal places.
     - This will result in arithmetic inaccuracies due to truncation of significant digits for small-scale (or very precise) floating point operations.
 - The flow of the user interface is not particularly friendly. The manipulation of the data entry could be confusing to some users, and the fact that the previous result will remain displayed in the buffer label when a single-operand operation such as square root is selected may be unclear to users. This is worsened by the square root operation accepting *either* the buffer label value or data entry label, with preference for the latter.
+  - If the user selects an operation before supplying any operand, there isn't an elegant way to move the first operand from the data entry into the buffer except by selecting the operation again.
 
 ## Things I Learned
 The following is a non-exhaustive list of things that I learned working on this project. If I went into too much detail I'd be writing a book, so I tried to focus on some of the key points.
