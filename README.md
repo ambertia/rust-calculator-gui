@@ -1,6 +1,6 @@
 # rust-calculator-gui
 
-This project explores creating desktop applications using Rust and GTK4. Moving beyond JavaFX, I chose GTK4 with the [GTK Rust bindings](https://gtk-rs.org/) to learn new tools and techniques. This was my first multi-day project using Rust and GTK, and I’m proud of the result. I had to heavily utilize the documentation for [GTK4](https://docs.gtk.org/gtk4/getting_started.html) and [the rust bindings](https://docs.rs/gtk4/latest/gtk4/). Besides these, there were two key resources that were extremely useful in creating this project:
+This project explores creating desktop applications using Rust and GTK4. Moving beyond JavaFX, I chose GTK4 with the [GTK Rust bindings](https://gtk-rs.org/) to learn new tools and techniques. This was my first multi-day project involving either Rust or GTK, and I’m proud of the result. I had to heavily utilize the documentation for [GTK4](https://docs.gtk.org/gtk4/getting_started.html) and [the rust bindings](https://docs.rs/gtk4/latest/gtk4/). Besides these, there were two key resources that were extremely useful in creating this project:
 1. The famous article [A Half-Hour to Learn Rust](https://fasterthanli.me/articles/a-half-hour-to-learn-rust) by Amos (fasterthanlime), which provided a concise guide to Rust's syntax and quirks.
 2. [GUI Development with Rust and GTK4](https://gtk-rs.org/gtk4-rs/git/book/introduction.html), the official GTK4 book, which details how to create applications and manage GTK’s unique integration with Rust.
 
