@@ -1,6 +1,8 @@
 use glib::subclass::InitializingObject;
 use gtk::{glib::{self}, subclass::prelude::*, CompositeTemplate, Label};
 use std::{boxed::Box, error::Error};
+use rust_decimal::prelude::*;
+use rust_decimal_macros::dec;
 
 // Object holding the state
 #[derive(CompositeTemplate, Default)]
@@ -39,27 +41,27 @@ impl Window {
                 self.operand_input_label.set_label(&(input.to_owned() + "."))
             },
             "=" => match self.calculate() {
-                Ok(f) => { self.clear(); self.operand_buffer_label.set_label(format!("{f:.5}").as_str()); },
+                Ok(d) => { self.clear(); self.operand_buffer_label.set_label(&d.to_string()); },
                 Err(_) => { self.clear(); self.operand_buffer_label.set_label("ERR"); }
             },
             _ => {}
         }
     }
 
-    fn calculate(&self) -> Result<f64, Box<dyn Error>> {
+    fn calculate(&self) -> Result<Decimal, Box<dyn Error>> {
         // Get the operation label
         let operation: &str = &self.operation_label.label();
 
         // Get the first operand from its label
-        let input: f64 = match self.operand_input_label.label().parse() {
-            Ok(f) => f,
+        let input  = match Decimal::from_str(&self.operand_input_label.label()) {
+            Ok(d) => d,
             Err(e) => return Err(Box::new(e)),
         };
 
         // Get the second operand from its label, but don't abort on error if the operation doesn't need this operand
-        let buffer: f64 = match self.operand_buffer_label.label().parse() {
-            Ok(f) => f,
-            Err(_) if "√".contains(operation) => 0.,
+        let buffer = match Decimal::from_str(&self.operand_buffer_label.label()) {
+            Ok(d) => d,
+            Err(_) if "√".contains(operation) => dec!(0.),
             Err(e) => return Err(Box::new(e)),
         };
 
@@ -69,8 +71,8 @@ impl Window {
             "-" => Ok(buffer - input),
             "*" => Ok(buffer * input),
             "÷" => Ok(buffer / input),
-            "^" => Ok(buffer.powf(input)),
-            "√" => Ok(input.sqrt()),
+            "^" => Ok(buffer.checked_powd(input).unwrap()),
+            "√" => Ok(input.sqrt().unwrap()),
             _ => Err(Box::<dyn Error>::from("Unknown operation")),
         }
     }
