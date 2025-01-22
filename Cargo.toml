@@ -6,6 +6,8 @@ build = "build.rs"
 
 [dependencies]
 gtk = { version = "0.9.4", package = "gtk4", features = ["v4_16"] }
+rust_decimal = "1.36.0"
+rust_decimal_macros = "1.36.0"
 
 [build-dependencies]
 glib-build-tools = "0.20.0"
