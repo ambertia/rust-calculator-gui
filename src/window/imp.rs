@@ -1,5 +1,5 @@
 use glib::subclass::InitializingObject;
-use gtk::{glib::{self}, subclass::prelude::*, CompositeTemplate, Entry, Label};
+use gtk::{glib::{self}, prelude::EditableExt, subclass::prelude::*, CompositeTemplate, Entry, Label};
 use std::{boxed::Box, error::Error};
 
 // Object holding the state
