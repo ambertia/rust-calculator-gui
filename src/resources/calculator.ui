@@ -15,34 +15,24 @@
             <property name="margin-start">10</property>
             <property name="margin-end">10</property>
 
-            <!-- Label to contain the operand in the buffer -->
+            <!-- Entry where the expression is entered -->
             <child>
-              <object class="GtkLabel" id="operand_buffer_label">
+              <object class="GtkEntry" id="expression_entry">
                 <property name="height-request">100</property>
                 <property name="hexpand">true</property>
                 <property name="xalign">1</property>
-                <property name="label"></property>
               </object>
             </child>
 
-            <!-- Box to hold operation label and input operand -->
+            <!-- Box to hold the answer label and maybe more things later -->
             <child>
-              <object class="GtkBox" id="box_inputs">
-                <property name="height-request">100</property>
+              <object class="GtkBox" id="bottom_strip">
+                <property name="height-request">50</property>
                 <property name="orientation">horizontal</property>
 
-                <!-- Operation label -->
+                <!-- Answer label -->
                 <child>
-                  <object class="GtkLabel" id="operation_label">
-                    <property name="width-request">100</property>
-                    <property name="label"></property>
-                    <property name="xalign">0.5</property>
-                  </object>
-                </child>
-
-                <!-- Input operand label -->
-                <child>
-                  <object class="GtkLabel" id="operand_input_label">
+                  <object class="GtkLabel" id="result_label">
                     <property name="hexpand">true</property>
                     <property name="xalign">1</property>
                     <property name="label"></property>
