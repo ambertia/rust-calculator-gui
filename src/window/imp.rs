@@ -1,5 +1,5 @@
 use glib::subclass::InitializingObject;
-use gtk::{glib::{self}, subclass::prelude::*, CompositeTemplate, Label};
+use gtk::{glib::{self}, subclass::prelude::*, CompositeTemplate, Entry, Label};
 use std::{boxed::Box, error::Error};
 
 // Object holding the state
@@ -7,19 +7,16 @@ use std::{boxed::Box, error::Error};
 #[template(resource = "/com/github/ambertia/rust-calculator-gui/calculator.ui")]
 pub struct Window {
     #[template_child]
-    pub operand_buffer_label: TemplateChild<Label>,
+    pub expression_entry: TemplateChild<Entry>,
     #[template_child]
-    pub operand_input_label: TemplateChild<Label>,
-    #[template_child]
-    pub operation_label: TemplateChild<Label>,
+    pub answer_label: TemplateChild<Label>,
 }
 
 impl Window {
     // Clear all labels
     pub fn clear(&self) {
-        self.operand_buffer_label.set_label("");
-        self.operand_input_label.set_label("");
-        self.operation_label.set_label("");
+        self.expression_entry.set_text("");
+        self.answer_label.set_label("");
     }
 
     // Process a special action dispatch
