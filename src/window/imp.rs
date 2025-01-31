@@ -9,14 +9,14 @@ pub struct Window {
     #[template_child]
     pub expression_entry: TemplateChild<Entry>,
     #[template_child]
-    pub answer_label: TemplateChild<Label>,
+    pub result_label: TemplateChild<Label>,
 }
 
 impl Window {
     // Clear all labels
     pub fn clear(&self) {
         self.expression_entry.set_text("");
-        self.answer_label.set_label("");
+        self.result_label.set_label("");
     }
 
     // ! Broken with restructure
