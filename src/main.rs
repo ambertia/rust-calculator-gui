@@ -1,3 +1,4 @@
+mod equations;
 mod window;
 
 use gtk::{gdk::Display, gio::{self, ActionEntry}, glib, prelude::*, Application, CssProvider};
