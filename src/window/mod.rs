@@ -16,7 +16,8 @@ impl Window {
         Object::builder().property("application", app).build()
     }
 
-    fn setup_actions(&self) {
+    // ! Broken with restructure
+    /* fn setup_actions(&self) {
 
         // Action when a digit is dispatched
         let dispatch_digit = ActionEntry::builder("digit")
@@ -64,5 +65,5 @@ impl Window {
             .build();
 
         self.add_action_entries([dispatch_digit, dispatch_operation, dispatch_special]);
-    }
+    } */
 }

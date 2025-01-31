@@ -19,8 +19,9 @@ impl Window {
         self.answer_label.set_label("");
     }
 
+    // ! Broken with restructure
     // Process a special action dispatch
-    pub fn process_special(&self, parameter: &str) {
+    /* pub fn process_special(&self, parameter: &str) {
         let input: &str = &self.operand_input_label.label();
         match parameter {
             "C" => self.clear(),
@@ -41,9 +42,11 @@ impl Window {
             },
             _ => {}
         }
-    }
+    } */
 
-    fn calculate(&self) -> Result<f64, Box<dyn Error>> {
+    // TODO This needs an overhaul and might have to go in a new file
+    // ! Broken with restructure
+    /* fn calculate(&self) -> Result<f64, Box<dyn Error>> {
         // Get the operation label
         let operation: &str = &self.operation_label.label();
 
@@ -70,7 +73,7 @@ impl Window {
             "√" => Ok(input.sqrt()),
             _ => Err(Box::<dyn Error>::from("Unknown operation")),
         }
-    }
+    } */
 }
 
 // Central trait for subclassing an object
@@ -97,7 +100,7 @@ impl ObjectImpl for Window {
         self.parent_constructed();
 
         // Add actions
-        self.obj().setup_actions();
+        // self.obj().setup_actions();
     }
 }
 
