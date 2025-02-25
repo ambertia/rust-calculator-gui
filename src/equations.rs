@@ -13,6 +13,7 @@ pub mod equations {
         SquareRoot
     }
 
+    // Data types permitted in the equation tree
     enum NodeType {
         Operation(Operation),
         Decimal(Decimal),
@@ -24,6 +25,7 @@ pub mod equations {
         second_child: Option<Box<EquationTreeNode>>
     }
 
+    // Public function to take a string slice and present a Decimal
     pub fn process(s: &str) -> Decimal {
         // This will recursively build the entire operations tree
         let root = parse_node(s);
@@ -31,15 +33,20 @@ pub mod equations {
         collapse_node(root)
     }
 
+    // Solve the node's children recursively, then perform the node's operation
     fn collapse_node(n: EquationTreeNode) -> Decimal{
+        // Look at the content of the node
         let operation = match n.content {
+            // Decimal is the base case
             NodeType::Decimal(d) => return d,
             NodeType::Operation(o) => o
         };
 
+        // Recursively solve the children
         let first_operand = collapse_node(*n.first_child.expect("Operation node must have at least one operand"));
         let second_operand = collapse_node(*n.second_child.expect("Operation node has only one operand, but operation requires two operands"));
 
+        // Perform math based on what the actual operation is
         match operation {
             Operation::Add => first_operand + second_operand,
             Operation::Subtract => first_operand - second_operand,
@@ -47,11 +54,12 @@ pub mod equations {
         }
     }
 
-    // Recursively break the tree down into nodes
+    // Recursively break the equation down into a tree of nodes
     fn parse_node(s: &str) -> EquationTreeNode {
         // Find the lowest priority operation in the string
         let current_operation = match lowest_priority_operation(s) {
             // If there are no operations, the string should be a value
+            // TODO this will panic on incorrect input formatting
             None => {
                 let value: Decimal = s.try_into().expect("Could not convert &str to Decimal");
                 return EquationTreeNode {
@@ -64,6 +72,8 @@ pub mod equations {
             Some(t) => t
         };
 
+        // Construction of nodes for...
+        // Addition and subtraction
         if let '+' | '-' = current_operation.1 {
             return EquationTreeNode {
                 content: NodeType::Operation(match current_operation.1 {
@@ -86,6 +96,8 @@ pub mod equations {
     // Find the index and value of the lowest-priority operation in a string slice
     fn lowest_priority_operation(s: &str) -> Option<(usize, char)> {
         for c in s.chars().rev().enumerate() {
+            // Return on the first instance of addition or subtraction,
+            // as these are the lowest priority operations
             if let '+' | '-' = c.1 {
                 return Some((s.len() - c.0 - 1, c.1));
             }
