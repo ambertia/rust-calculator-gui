@@ -50,6 +50,8 @@ pub mod equations {
         match operation {
             Operation::Add => first_operand + second_operand,
             Operation::Subtract => first_operand - second_operand,
+            Operation::Multiply => first_operand * second_operand,
+            Operation::Divide => first_operand / second_operand,
             _ => 0.into(),
         }
     }
@@ -84,6 +86,17 @@ pub mod equations {
                 second_child: Some(Box::new(parse_node(&s[(current_operation.0 + 1)..])))
             }
         }
+        // Multiplication and division
+        else if let '*' | '/' = current_operation.1 {
+            return EquationTreeNode {
+                content: NodeType::Operation(match current_operation.1 {
+                    '*' => Operation::Multiply,
+                    _ => Operation::Divide
+                }),
+                first_child: Some(Box::new(parse_node(&s[..(current_operation.0)]))),
+                second_child: Some(Box::new(parse_node(&s[(current_operation.0 + 1)..])))
+            }
+        }
         else {
             EquationTreeNode {
                 content: NodeType::Decimal(0.into()),
@@ -95,13 +108,19 @@ pub mod equations {
 
     // Find the index and value of the lowest-priority operation in a string slice
     fn lowest_priority_operation(s: &str) -> Option<(usize, char)> {
+        let mut candidate: Option<(usize, char)> = None;
         for c in s.chars().rev().enumerate() {
             // Return on the first instance of addition or subtraction,
             // as these are the lowest priority operations
             if let '+' | '-' = c.1 {
                 return Some((s.len() - c.0 - 1, c.1));
             }
+            // If the candidate is None, it can be populated with mult/divi
+            else if let '*' | '/' = c.1 {
+                candidate = Some((s.len() - c.0 - 1, c.1));
+            }
         }
-        None
+        // Return the candidate
+        candidate
     }
 }
