@@ -46,7 +46,7 @@ pub mod equations {
         let first_operand = collapse_node(*n.first_child.expect("Operation node must have at least one operand"));
         let second_operand = collapse_node(*n.second_child.expect("Operation node has only one operand, but operation requires two operands"));
 
-        // Perform math based on what the actual operation is
+        // Perform math based on what the actual operation is and implicit return
         match operation {
             Operation::Add => first_operand + second_operand,
             Operation::Subtract => first_operand - second_operand,
@@ -58,7 +58,7 @@ pub mod equations {
 
     // Recursively break the equation down into a tree of nodes
     fn parse_node(s: &str) -> EquationTreeNode {
-        // Find the lowest priority operation in the string
+        // Find the right-most, lowest priority operation in the string
         let current_operation = match lowest_priority_operation(s) {
             // If there are no operations, the string should be a value
             // TODO this will panic on incorrect input formatting
