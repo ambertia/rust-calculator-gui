@@ -2,7 +2,6 @@
 // Start with basic arithmetic with two operands and move on from there
 pub mod equations {
     use rust_decimal::Decimal;
-    use rust_decimal_macros::dec;
 
     enum Operation {
         Add,

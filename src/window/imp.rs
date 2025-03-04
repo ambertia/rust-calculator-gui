@@ -1,8 +1,5 @@
 use glib::subclass::InitializingObject;
 use gtk::{glib::{self}, prelude::EditableExt, subclass::prelude::*, CompositeTemplate, Entry, Label};
-use std::{boxed::Box, error::Error};
-use rust_decimal::prelude::*;
-use rust_decimal_macros::dec;
 
 // Object holding the state
 #[derive(CompositeTemplate, Default)]

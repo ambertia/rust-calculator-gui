@@ -1,7 +1,7 @@
 mod imp;
 
 use glib::Object;
-use gtk::{gio::{self, ActionEntry}, glib, prelude::{ActionMapExtManual, StaticVariantType}, subclass::prelude::ObjectSubclassIsExt, Application};
+use gtk::{gio::{self}, glib, Application};
 
 glib::wrapper! {
     pub struct Window(ObjectSubclass<imp::Window>)
