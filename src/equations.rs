@@ -58,9 +58,12 @@ pub mod equations {
     // Recursively break the equation down into a tree of nodes
     fn parse_node(s: &str) -> EquationTreeNode {
         // Find the right-most, lowest priority operation in the string
-        let current_operation = match lowest_priority_operation(s) {
-            // If there are no operations, the string should be a value
-            // TODO this will panic on incorrect input formatting
+        match lowest_priority_operation(s) {
+            // If there are no operations, the string should be a numeric value;
+            // return this immediately as a leaf.
+            // TODO this will panic on incorrect input formatting, handle more gracefully?
+            // Defaulting could be nice, but if the user types something with incorrect
+            // formatting I'd rather abort and alert them
             None => {
                 let value: Decimal = s.try_into().expect("Could not convert &str to Decimal");
                 return EquationTreeNode {
@@ -69,45 +72,21 @@ pub mod equations {
                     second_child: None,
                 }
             },
-            // Assign the value if search result is Some
-            Some(t) => t
+            // Construct a node if the value is Some
+            Some(t) => {
+                return EquationTreeNode {
+                    content: NodeType::Operation(t.1),
+                    first_child: Some(Box::new(parse_node(&s[..(t.0)]))),
+                    second_child: Some(Box::new(parse_node(&s[(t.0 + 1)..])))
+                }
+            }
         };
 
-        // Construction of nodes for...
-        // Addition and subtraction
-        if let '+' | '-' = current_operation.1 {
-            return EquationTreeNode {
-                content: NodeType::Operation(match current_operation.1 {
-                    '+' => Operation::Add,
-                    _ => Operation::Subtract
-                }),
-                first_child: Some(Box::new(parse_node(&s[..(current_operation.0)]))),
-                second_child: Some(Box::new(parse_node(&s[(current_operation.0 + 1)..])))
-            }
-        }
-        // Multiplication and division
-        else if let '*' | '/' = current_operation.1 {
-            return EquationTreeNode {
-                content: NodeType::Operation(match current_operation.1 {
-                    '*' => Operation::Multiply,
-                    _ => Operation::Divide
-                }),
-                first_child: Some(Box::new(parse_node(&s[..(current_operation.0)]))),
-                second_child: Some(Box::new(parse_node(&s[(current_operation.0 + 1)..])))
-            }
-        }
-        else {
-            EquationTreeNode {
-                content: NodeType::Decimal(0.into()),
-                first_child: None,
-                second_child: None,
-            }
-        }
     }
 
     // Find the index and value of the right-most, lowest-priority operation in a string slice
-    fn lowest_priority_operation(s: &str) -> Option<(usize, char)> {
-        let mut candidate: Option<(usize, char)> = None;
+    fn lowest_priority_operation(s: &str) -> Option<(usize, Operation)> {
+        let mut candidate: Option<(usize, Operation)> = None;
         let mut candidate_precedence: usize = 0;
 
         for c in s.chars().rev().enumerate() {
@@ -118,11 +97,11 @@ pub mod equations {
             if c_precedence == 0 { continue }
             // Return on the first instance of addition or subtraction,
             // as these are the lowest priority operations
-            else if c_precedence == 1 { return Some((s.len() - c.0 - 1, c.1)); }
+            else if c_precedence == 1 { return Some((s.len() - c.0 - 1, get_operation(&c.1)?)) }
             // If there is no assigned candidate, assign it with this operation
             // If there is a candidate, reassign if the current operation has a lower precedence
-            else if candidate == None || c_precedence < candidate_precedence {
-                candidate = Some((s.len() - c.0 - 1, c.1));
+            else if candidate.is_none() || c_precedence < candidate_precedence {
+                candidate = Some((s.len() - c.0 - 1, get_operation(&c.1)?));
                 candidate_precedence = c_precedence;
             }
         }
