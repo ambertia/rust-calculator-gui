@@ -131,6 +131,18 @@ pub mod equations {
     }
 
     // Helper function to reuse a match block
+    fn get_operation(c: &char) -> Option<Operation> {
+        match c {
+            '+' => Some(Operation::Add),
+            '-' => Some(Operation::Subtract),
+            '*' => Some(Operation::Multiply),
+            '/' => Some(Operation::Divide),
+            '^' => Some(Operation::Exponent),
+            _ => None
+        }
+    }
+
+    // Helper function to reuse a match block
     // Get the PEMDAS precedence of an operation character (higher is more important)
     // Defaults to 0 if c does not match any patterns
     fn get_precedence(c: &char) -> usize {
