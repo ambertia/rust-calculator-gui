@@ -122,4 +122,15 @@ pub mod equations {
         // Return the candidate
         candidate
     }
+
+    // Helper function to reuse a match block
+    // Get the PEMDAS precedence of an operation character (higher is more important)
+    // Defaults to 0 if c does not match any patterns
+    fn get_precedence(c: &char) -> usize {
+        match c {
+            '+' | '-' => 1,
+            '*' | '/' => 2,
+            _ => 0
+        }
+    }
 }
