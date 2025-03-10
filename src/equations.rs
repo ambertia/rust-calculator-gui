@@ -105,18 +105,25 @@ pub mod equations {
         }
     }
 
-    // Find the index and value of the lowest-priority operation in a string slice
+    // Find the index and value of the right-most, lowest-priority operation in a string slice
     fn lowest_priority_operation(s: &str) -> Option<(usize, char)> {
         let mut candidate: Option<(usize, char)> = None;
+        let mut candidate_precedence: usize = 0;
+
         for c in s.chars().rev().enumerate() {
+            // Get the order of operations precedence of this character
+            let c_precedence = get_precedence(&c.1);
+
+            // If this character is not an operation, continue - Important base case
+            if c_precedence == 0 { continue }
             // Return on the first instance of addition or subtraction,
             // as these are the lowest priority operations
-            if let '+' | '-' = c.1 {
-                return Some((s.len() - c.0 - 1, c.1));
-            }
-            // If the candidate is None, it can be populated with mult/divi
-            else if let '*' | '/' = c.1 {
+            else if c_precedence == 1 { return Some((s.len() - c.0 - 1, c.1)); }
+            // If there is no assigned candidate, assign it with this operation
+            // If there is a candidate, reassign if the current operation has a lower precedence
+            else if candidate == None || c_precedence < candidate_precedence {
                 candidate = Some((s.len() - c.0 - 1, c.1));
+                candidate_precedence = c_precedence;
             }
         }
         // Return the candidate
