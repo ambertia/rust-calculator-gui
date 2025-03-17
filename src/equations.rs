@@ -143,6 +143,6 @@ mod tests {
 
     #[test]
     fn test_equation() {
-        assert_eq!(process("2+8*5.2/1.3-9/2+4^2"), Decimal::new(455, 1));
+        assert_eq!(process("2+8*(5.2/1.3-9/2)+4^2"), Decimal::from(14));
     }
 }
