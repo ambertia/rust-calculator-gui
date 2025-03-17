@@ -134,3 +134,15 @@ pub mod equations {
         }
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use rust_decimal::Decimal;
+
+    use super::equations::process;
+
+    #[test]
+    fn test_equation() {
+        assert_eq!(process("2+8*5.2/1.3-9/2+4^2"), Decimal::new(455, 1));
+    }
+}
