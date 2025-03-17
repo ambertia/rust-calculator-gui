@@ -1,7 +1,7 @@
 // TODO Equation parsing and processing!
 // Start with basic arithmetic with two operands and move on from there
 pub mod equations {
-    use rust_decimal::Decimal;
+    use rust_decimal::{Decimal, MathematicalOps};
 
     enum Operation {
         Add,
@@ -25,6 +25,7 @@ pub mod equations {
     }
 
     // Public function to take a string slice and present a Decimal
+    // This is the main external entry point!
     pub fn process(s: &str) -> Decimal {
         // This will recursively build the entire operations tree
         let root = parse_node(s);
@@ -51,6 +52,7 @@ pub mod equations {
             Operation::Subtract => first_operand - second_operand,
             Operation::Multiply => first_operand * second_operand,
             Operation::Divide => first_operand / second_operand,
+            Operation::Exponent => first_operand.powd(second_operand),
             _ => 0.into(),
         }
     }
@@ -81,7 +83,6 @@ pub mod equations {
                 }
             }
         };
-
     }
 
     // Find the index and value of the right-most, lowest-priority operation in a string slice
@@ -128,6 +129,7 @@ pub mod equations {
         match c {
             '+' | '-' => 1,
             '*' | '/' => 2,
+            '^' => 3,
             _ => 0
         }
     }
