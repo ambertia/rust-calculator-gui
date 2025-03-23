@@ -59,8 +59,19 @@ pub mod equations {
 
     // Recursively break the equation down into a tree of nodes
     fn parse_node(s: &str) -> EquationTreeNode {
+
+        let strip;
         // Find the right-most, lowest priority operation in the string
-        match lowest_priority_operation(s) {
+        match lowest_priority_operation({
+            // If the string starts and ends with parens then strip them
+            if s.ends_with(")") && s.starts_with("(") {
+                strip = true;
+                s.trim_matches(|c| c == '(' || c ==')')
+            } else {
+                strip = false;
+                s
+            }
+        }) {
             // If there are no operations, the string should be a numeric value;
             // return this immediately as a leaf.
             // TODO this will panic on incorrect input formatting, handle more gracefully?
@@ -78,8 +89,14 @@ pub mod equations {
             Some(t) => {
                 return EquationTreeNode {
                     content: NodeType::Operation(t.1),
-                    first_child: Some(Box::new(parse_node(&s[..(t.0)]))),
-                    second_child: Some(Box::new(parse_node(&s[(t.0 + 1)..])))
+                    first_child: Some(Box::new(parse_node({
+                        if strip { &s[1..(t.0 + 1)] }
+                        else { &s[..(t.0)] }
+                    }))),
+                    second_child: Some(Box::new(parse_node({
+                        if strip { &s[(t.0 + 2)..(s.len() - 1)] }
+                        else { &s[(t.0 + 1)..] }
+                    })))
                 }
             }
         };
@@ -89,8 +106,21 @@ pub mod equations {
     fn lowest_priority_operation(s: &str) -> Option<(usize, Operation)> {
         let mut candidate: Option<(usize, Operation)> = None;
         let mut candidate_precedence: usize = 0;
+        let mut parenthese_depth: usize = 0;
 
         for c in s.chars().rev().enumerate() {
+
+            // Process parentheses first, specially
+            if c.1 == ')' {
+                parenthese_depth += 1;
+                continue;
+            } else if c.1 == '(' {
+                parenthese_depth -= 1;
+                continue;
+            } else if parenthese_depth > 0 {
+                continue;
+            }
+
             // Get the order of operations precedence of this character
             let c_precedence = get_precedence(&c.1);
 
