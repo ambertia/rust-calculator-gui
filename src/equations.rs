@@ -78,7 +78,7 @@ pub mod equations {
             // Defaulting could be nice, but if the user types something with incorrect
             // formatting I'd rather abort and alert them
             None => {
-                let value: Decimal = s.try_into().expect("Could not convert &str to Decimal");
+                let value: Decimal = s.try_into().expect(&format!("Could not convert '{}' to Decimal", s));
                 return EquationTreeNode {
                     content: NodeType::Decimal(value),
                     first_child: None,
