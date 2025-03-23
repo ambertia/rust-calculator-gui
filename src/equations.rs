@@ -172,7 +172,23 @@ mod tests {
     use super::equations::process;
 
     #[test]
-    fn test_equation() {
-        assert_eq!(process("2+8*(5.2/1.3-9/2)+4^2"), Decimal::from(14));
+    fn basic_operations() {
+        assert_eq!(process("2.4+8"), Decimal::new(104, 1));
+        assert_eq!(process("8-3.82"), Decimal::new(418, 2));
+        assert_eq!(process("5*3.6"), Decimal::new(18, 0));
+        assert_eq!(process("9.8/3.2"), Decimal::new(30625, 4));
+        assert_eq!(process("4^3.5"), Decimal::new(128, 0));
+    }
+
+    #[test]
+    fn order_of_operations() {
+        assert_eq!(process("8+2-7*9/2^3"), Decimal::new(2125, 3));
+        assert_eq!(process("2^7/8*2-9+3"), Decimal::new(20, 0));
+    }
+
+    #[test]
+    fn parentheses() {
+        assert_eq!(process("2+8*(5.2/1.3-9/2)+4^2"), Decimal::new(14, 0));
+        assert_eq!(process("4*(3.4+5*(8-3^2))+2*(8.3-4)"), Decimal::new(22, 1));
     }
 }
