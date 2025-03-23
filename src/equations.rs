@@ -36,7 +36,7 @@ pub mod equations {
     }
 
     // Solve the node's children recursively, then perform the node's operation
-    fn collapse_node(n: EquationTreeNode) -> Decimal{
+    fn collapse_node(n: EquationTreeNode) -> Decimal {
         // Look at the content of the node
         let operation = match n.content {
             // Decimal is the base case
