@@ -191,4 +191,11 @@ mod tests {
         assert_eq!(process("2+8*(5.2/1.3-9/2)+4^2"), Decimal::new(14, 0));
         assert_eq!(process("4*(3.4+5*(8-3^2))+2*(8.3-4)"), Decimal::new(22, 1));
     }
+
+    #[test]
+    fn parentheses_special() {
+        assert_eq!(process("sqrt(4)"), Decimal::new(2, 0));
+        assert_eq!(process("4.2(5)"), Decimal::new(21, 0));
+        assert_eq!(process("(3+4.6)(20.8/5)"), Decimal::new(31616, 3));
+    }
 }
