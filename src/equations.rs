@@ -85,11 +85,12 @@ pub mod equations {
                     second_child: None,
                 }
             },
-            // Construct a node if the value is Some
+            // Construct a node with an operation and children if the value is Some
             Some(t) => {
                 return EquationTreeNode {
                     content: NodeType::Operation(t.1),
                     first_child: Some(Box::new(parse_node({
+                        // If parentheses were stripped, this must be accounted for
                         if strip { &s[1..(t.0 + 1)] }
                         else { &s[..(t.0)] }
                     }))),
@@ -104,10 +105,13 @@ pub mod equations {
 
     // Find the index and value of the right-most, lowest-priority operation in a string slice
     fn lowest_priority_operation(s: &str) -> Option<(usize, Operation)> {
+
+        // Variables to record data that must be tracked during the parsing process
         let mut candidate: Option<(usize, Operation)> = None;
         let mut candidate_precedence: usize = 0;
         let mut parenthese_depth: usize = 0;
 
+        // Iterate over every character in the string to be parsed, starting from the back
         for c in s.chars().rev().enumerate() {
 
             // Process parentheses first, specially
@@ -130,13 +134,13 @@ pub mod equations {
             // as these are the lowest priority operations
             else if c_precedence == 1 { return Some((s.len() - c.0 - 1, get_operation(&c.1)?)) }
             // If there is no assigned candidate, assign it with this operation
-            // If there is a candidate, reassign if the current operation has a lower precedence
-            else if candidate.is_none() || c_precedence < candidate_precedence {
+            // If there is a candidate, reassign if the current operation has a lower or equal precedence
+            else if candidate.is_none() || c_precedence <= candidate_precedence {
                 candidate = Some((s.len() - c.0 - 1, get_operation(&c.1)?));
                 candidate_precedence = c_precedence;
             }
         }
-        // Return the candidate
+        // Return the current candidate
         candidate
     }
 
