@@ -3,6 +3,7 @@
 pub mod equations {
     use rust_decimal::{Decimal, MathematicalOps};
 
+    // Supported mathematical operations
     enum Operation {
         Add,
         Subtract,
@@ -12,19 +13,20 @@ pub mod equations {
         SquareRoot
     }
 
-    // Data types permitted in the equation tree
+    // Data types permitted in the equation parsing tree
     enum NodeType {
         Operation(Operation),
         Decimal(Decimal),
     }
 
+    // Nodes for the equation parsing tree
     struct EquationTreeNode {
         content: NodeType,
         first_child: Option<Box<EquationTreeNode>>,
         second_child: Option<Box<EquationTreeNode>>
     }
 
-    // Public function to take a string slice and present a Decimal
+    // Public function to take an equation as a string slice and present a Decimal
     // This is the main external entry point!
     pub fn process(s: &str) -> Decimal {
         // This will recursively build the entire operations tree
@@ -75,8 +77,6 @@ pub mod equations {
             // If there are no operations, the string should be a numeric value;
             // return this immediately as a leaf.
             // TODO this will panic on incorrect input formatting, handle more gracefully?
-            // Defaulting could be nice, but if the user types something with incorrect
-            // formatting I'd rather abort and alert them
             None => {
                 let value: Decimal = s.try_into().expect(&format!("Could not convert '{}' to Decimal", s));
                 return EquationTreeNode {
