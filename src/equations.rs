@@ -28,11 +28,11 @@ pub mod equations {
 
     // Public function to take an equation as a string slice and present a Decimal
     // This is the main external entry point!
-    pub fn process(s: &str) -> Decimal {
+    pub fn process(s: &str) -> Result<Decimal, String> {
         // This will recursively build the entire operations tree
-        let root = parse_node(s);
+        let root = parse_node(s)?;
         // Recursively solve the equation from the tree
-        collapse_node(root)
+        Ok(collapse_node(root))
     }
 
     // Solve the node's children recursively, then perform the node's operation
@@ -60,7 +60,7 @@ pub mod equations {
     }
 
     // Recursively break the equation down into a tree of nodes
-    fn parse_node(s: &str) -> EquationTreeNode {
+    fn parse_node(s: &str) -> Result<EquationTreeNode, String> {
 
         let strip;
         // Find the right-most, lowest priority operation in the string
@@ -78,27 +78,30 @@ pub mod equations {
             // return this immediately as a leaf.
             // TODO this will panic on incorrect input formatting, handle more gracefully?
             None => {
-                let value: Decimal = s.try_into().expect(&format!("Could not convert '{}' to Decimal", s));
-                return EquationTreeNode {
+                let value: Decimal = match s.try_into() {
+                    Ok(d) => { d },
+                    Err(_) => { return Err(format!("Couldn't convert {} to Decimal", s)) },
+                };
+                return Ok(EquationTreeNode {
                     content: NodeType::Decimal(value),
                     first_child: None,
                     second_child: None,
-                }
+                })
             },
             // Construct a node with an operation and children if the value is Some
             Some(t) => {
-                return EquationTreeNode {
+                return Ok(EquationTreeNode {
                     content: NodeType::Operation(t.1),
                     first_child: Some(Box::new(parse_node({
                         // If parentheses were stripped, this must be accounted for
                         if strip { &s[1..(t.0 + 1)] }
                         else { &s[..(t.0)] }
-                    }))),
+                    })?)),
                     second_child: Some(Box::new(parse_node({
                         if strip { &s[(t.0 + 2)..(s.len() - 1)] }
                         else { &s[(t.0 + 1)..] }
-                    })))
-                }
+                    })?))
+                })
             }
         };
     }
