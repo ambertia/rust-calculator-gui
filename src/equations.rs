@@ -180,29 +180,29 @@ mod tests {
 
     #[test]
     fn basic_operations() {
-        assert_eq!(process("2.4+8"), Decimal::new(104, 1));
-        assert_eq!(process("8-3.82"), Decimal::new(418, 2));
-        assert_eq!(process("5*3.6"), Decimal::new(18, 0));
-        assert_eq!(process("9.8/3.2"), Decimal::new(30625, 4));
-        assert_eq!(process("4^3.5"), Decimal::new(128, 0));
+        assert_eq!(process("2.4+8").unwrap(), Decimal::new(104, 1));
+        assert_eq!(process("8-3.82").unwrap(), Decimal::new(418, 2));
+        assert_eq!(process("5*3.6").unwrap(), Decimal::new(18, 0));
+        assert_eq!(process("9.8/3.2").unwrap(), Decimal::new(30625, 4));
+        assert_eq!(process("4^3.5").unwrap(), Decimal::new(128, 0));
     }
 
     #[test]
     fn order_of_operations() {
-        assert_eq!(process("8+2-7*9/2^3"), Decimal::new(2125, 3));
-        assert_eq!(process("2^7/8*2-9+3"), Decimal::new(20, 0));
+        assert_eq!(process("8+2-7*9/2^3").unwrap(), Decimal::new(2125, 3));
+        assert_eq!(process("2^7/8*2-9+3").unwrap(), Decimal::new(20, 0));
     }
 
     #[test]
     fn parentheses() {
-        assert_eq!(process("2+8*(5.2/1.3-9/2)+4^2"), Decimal::new(14, 0));
-        assert_eq!(process("4*(3.4+5*(8-3^2))+2*(8.3-4)"), Decimal::new(22, 1));
+        assert_eq!(process("2+8*(5.2/1.3-9/2)+4^2").unwrap(), Decimal::new(14, 0));
+        assert_eq!(process("4*(3.4+5*(8-3^2))+2*(8.3-4)").unwrap(), Decimal::new(22, 1));
     }
 
     #[test]
     fn parentheses_special() {
-        assert_eq!(process("sqrt(4)"), Decimal::new(2, 0));
-        assert_eq!(process("4.2(5)"), Decimal::new(21, 0));
-        assert_eq!(process("(3+4.6)(20.8/5)"), Decimal::new(31616, 3));
+        assert_eq!(process("sqrt(4)").unwrap(), Decimal::new(2, 0));
+        assert_eq!(process("4.2(5)").unwrap(), Decimal::new(21, 0));
+        assert_eq!(process("(3+4.6)(20.8/5)").unwrap(), Decimal::new(31616, 3));
     }
 }
