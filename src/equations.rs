@@ -190,7 +190,7 @@ mod tests {
     #[test]
     fn order_of_operations() {
         assert_eq!(process("8+2-7*9/2^3").unwrap(), Decimal::new(2125, 3));
-        assert_eq!(process("2^7/8*2-9+3").unwrap(), Decimal::new(20, 0));
+        assert_eq!(process("2^7/8*2-9+3").unwrap(), Decimal::new(26, 0));
     }
 
     #[test]
