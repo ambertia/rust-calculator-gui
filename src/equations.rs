@@ -137,8 +137,8 @@ pub mod equations {
             // as these are the lowest priority operations
             else if c_precedence == 1 { return Some((s.len() - c.0 - 1, get_operation(&c.1)?)) }
             // If there is no assigned candidate, assign it with this operation
-            // If there is a candidate, reassign if the current operation has a lower or equal precedence
-            else if candidate.is_none() || c_precedence <= candidate_precedence {
+            // If there is a candidate, reassign if the current operation has a lower precedence
+            else if candidate.is_none() || c_precedence < candidate_precedence {
                 candidate = Some((s.len() - c.0 - 1, get_operation(&c.1)?));
                 candidate_precedence = c_precedence;
             }
