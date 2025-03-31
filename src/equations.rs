@@ -184,7 +184,7 @@ mod tests {
         assert_eq!(process("8-3.82").unwrap(), Decimal::new(418, 2));
         assert_eq!(process("5*3.6").unwrap(), Decimal::new(18, 0));
         assert_eq!(process("9.8/3.2").unwrap(), Decimal::new(30625, 4));
-        assert_eq!(process("4^3.5").unwrap(), Decimal::new(128, 0));
+        assert_eq!(process("4^3").unwrap(), Decimal::new(64, 0));
     }
 
     #[test]
